@@ -1,0 +1,21 @@
+<form id="dataForm">  
+  <input type="text" name="name" placeholder="Name" required>  
+  <input type="email" name="email" placeholder="Email" required>  
+  <button type="submit">Submit</button>  
+</form>  
+
+<script>  
+  document.getElementById('dataForm').addEventListener('submit', async (e) => {  
+    e.preventDefault();  
+    const response = await fetch('/submit', {  
+      method: 'POST',  
+      headers: { 'Content-Type': 'application/json' },  
+      body: JSON.stringify({  
+        name: e.target.name.value,  
+        email: e.target.email.value,  
+      }),  
+    });  
+    const result = await response.json();  
+    console.log('Submission Result:', result);  
+  });  
+</script>  
