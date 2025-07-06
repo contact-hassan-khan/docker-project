@@ -1,21 +1,29 @@
-version: '3'  
-services:  
-  frontend:  
-    build: ./frontend  
-    ports:  
-      - "3000:3000"  
-    depends_on:  
-      - backend  
-    networks:  
-      - app-network  
+version: '3.8'
 
-  backend:  
-    build: ./backend  
-    ports:  
-      - "5000:5000"  
-    networks:  
-      - app-network  
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-front
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    restart: always
 
-networks:  
-  app-network:  
-    driver: bridge  
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-back
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+    restart: always
+
+networks:
+  app-network:
+    driver: bridge
+  
